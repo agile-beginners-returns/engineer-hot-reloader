@@ -1,18 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class WordTestAnswerScreen extends ConsumerWidget {
-  final String articleUrl;
-  const WordTestAnswerScreen({required this.articleUrl});
+class WordTestAnswerScreen extends ConsumerStatefulWidget {
+  final String userAnswer;
+  final String correctAnswer;
+  const WordTestAnswerScreen({
+    required this.userAnswer,
+    required this.correctAnswer,
+  });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(articleUrl),
-      ),
-      body: Center(
-        child: Text('Word Test Answer Screen'),
+  _WordTestAnswerScreenState createState() => _WordTestAnswerScreenState();
+}
+
+class _WordTestAnswerScreenState extends ConsumerState<WordTestAnswerScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('Answer'),
+            ],
+          ),
+        ),
       ),
     );
   }

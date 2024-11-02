@@ -10,6 +10,59 @@ final jsonStateNotifierProvider =
   return JsonStateNotifier();
 });
 
+class TestListNotifier extends StateNotifier<List<Question>> {
+  TestListNotifier() : super([]);
+
+  // JSONから複数の`Question`をリストに追加するメソッド
+  void addQuestions(Map<String, dynamic> questionsJson) {
+    // print('questionsJson$questionsJson');
+    // "Questions"キーにアクセスして各エントリを`Question`に変換
+    final questions = (questionsJson)
+        .entries
+        .map(
+          (entry) => Question.fromJson(entry.value),
+        )
+        .toList();
+    print("questions:${questions[0].question}");
+    // 既存のリストに追加
+    state = [...state, ...questions];
+  }
+}
+
+// `QuestionListNotifier`を使った`Provider`の定義
+final testListProvider =
+    StateNotifierProvider<TestListNotifier, List<Question>>((ref) {
+  return TestListNotifier();
+});
+
+class Question {
+  Question({
+    required this.question,
+    required this.choices,
+    required this.answer,
+    this.userAnswer,
+    this.otherMeanings,
+    required this.example,
+  });
+  final String question;
+  final Map<String, dynamic> choices;
+  final String answer;
+  final String? userAnswer;
+  final String? otherMeanings;
+  final String example;
+
+  // JSONデータから`Question`インスタンスを作成するファクトリーメソッド
+  factory Question.fromJson(Map<String, dynamic> json) {
+    return Question(
+      question: json['Question'],
+      choices: Map<String, String>.from(json['Choices']),
+      answer: json['Answer'],
+      otherMeanings: json['OtherMeanings'] ?? '',
+      example: json['Example'] ?? '',
+    );
+  }
+}
+
 class JsonStateNotifier extends AsyncNotifier<Map<String, dynamic>> {
   @override
   Future<Map<String, dynamic>> build() async {
@@ -17,7 +70,7 @@ class JsonStateNotifier extends AsyncNotifier<Map<String, dynamic>> {
     return {'Questions': null};
   }
 
-  Future<Map<String, dynamic>> callDifyAPI(String userInputUrl) async {
+  Future<Map<String, dynamic>?> callDifyAPI(String userInputUrl) async {
     // final url = Uri.parse(userInputUrl);
     final url = Uri.parse('https://api.dify.ai/v1/workflows/run');
     print('url:$url');
@@ -40,15 +93,18 @@ class JsonStateNotifier extends AsyncNotifier<Map<String, dynamic>> {
       print('response.body"${response.body}');
 
       if (response.statusCode == 200) {
-        return jsonDecode(response.body) as Map<String, dynamic>;
-      } // レスポンスを処理します
-      else {
+        final response1 = jsonDecode(response.body) as Map<String, dynamic>;
+        final response2 =
+            jsonDecode(response1['data']['outputs']['output_json'])
+                as Map<String, dynamic>;
+        return response2;
+      } else {
         print('else');
-        return {'Questions': null};
+        return {'Error': null};
       }
     } catch (e) {
       print('catch');
-      return {'Questions': null};
+      return {'Error': null};
     }
   }
 }

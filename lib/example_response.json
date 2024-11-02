@@ -1,0 +1,112 @@
+{
+  "Questions": {
+    "Word1": {
+      "Question": "Stagnant",
+      "Choices": {
+        "1": "停滞した",
+        "2": "活発な",
+        "3": "流れる",
+        "4": "進行中の"
+      },
+      "Answer": "1",
+      "OtherMeanings": "淀んだ",
+      "Example": "The water in the pond was stagnant."
+    },
+    "Word2": {
+      "Question": "Contributors",
+      "Choices": {
+        "1": "寄稿者",
+        "2": "批判者",
+        "3": "購読者",
+        "4": "管理者"
+      },
+      "Answer": "1",
+      "OtherMeanings": "貢献者",
+      "Example": "The project had several contributors from different countries."
+    },
+    "Word3": {
+      "Question": "Indication",
+      "Choices": {
+        "1": "兆候",
+        "2": "否定",
+        "3": "模倣",
+        "4": "除外"
+      },
+      "Answer": "1",
+      "OtherMeanings": "指示",
+      "Example": "There was no indication of a problem."
+    },
+    "Word4": {
+      "Question": "Foundation",
+      "Choices": {
+        "1": "基盤",
+        "2": "解体",
+        "3": "誤解",
+        "4": "終了"
+      },
+      "Answer": "1",
+      "OtherMeanings": "設立",
+      "Example": "The foundation of the building was solid."
+    },
+    "Translation1": {
+      "Question": "Carroll believes that Google’s Flutter team numbers about 50 people, with the head count frozen in 2023 and then “a small number of layoffs” this year.",
+      "Choices": {
+        "1": "キャロルは、GoogleのFlutterチームが約50人で、2023年に人数が固定され、今年は「少数のレイオフ」があったと考えています。",
+        "2": "キャロルは、GoogleのFlutterチームが約50人で、2023年に人数が増加し、今年は「大規模なレイオフ」があったと考えています。",
+        "3": "キャロルは、GoogleのFlutterチームが約50人で、2023年に人数が減少し、今年は「レイオフがなかった」と考えています。",
+        "4": "キャロルは、GoogleのFlutterチームが約50人で、2023年に人数が変動し、今年は「多数のレイオフ」があったと考えています。"
+      },
+      "Answer": "1"
+    },
+    "Translation2": {
+      "Question": "Serious bugs are left unfixed for too long, Carroll said, causing large customers to stop using Flutter in some instances.",
+      "Choices": {
+        "1": "キャロルは、重大なバグが長期間放置され、大手顧客が一部のケースでFlutterの使用を中止する原因になっていると述べた。",
+        "2": "キャロルは、重大なバグがすぐに修正され、大手顧客がFlutterの使用を継続する理由になっていると述べた。",
+        "3": "キャロルは、重大なバグが長期間放置され、大手顧客がFlutterの使用を増やす原因になっていると述べた。",
+        "4": "キャロルは、重大なバグがすぐに修正され、大手顧客が一部のケースでFlutterの使用を中止する原因になっていると述べた。"
+      },
+      "Answer": "1"
+    },
+    "Translation3": {
+      "Question": "The goal of Flock is not to replace Google Flutter, but to add bug fixes and new features – in the hope that the Google team will add them “on their schedule.”",
+      "Choices": {
+        "1": "Flockの目標は、Google Flutterを置き換えることではなく、バグ修正と新機能を追加することです。Googleチームが「彼らのスケジュールで」それらを追加することを期待しています。",
+        "2": "Flockの目標は、Google Flutterを置き換えることであり、バグ修正と新機能を削除することです。Googleチームが「彼らのスケジュールで」それらを削除することを期待しています。",
+        "3": "Flockの目標は、Google Flutterを拡張することであり、バグ修正と新機能を追加することです。Googleチームが「彼らのスケジュールで」それらを削除することを期待しています。",
+        "4": "Flockの目標は、Google Flutterを置き換えることであり、バグ修正と新機能を削除することです。Googleチームが「彼らのスケジュールで」それらを追加することを期待しています。"
+      },
+      "Answer": "1"
+    },
+    "Translation4": {
+      "Question": "There is some support in the Flutter community for Carroll’s views.",
+      "Choices": {
+        "1": "Flutterコミュニティには、キャロルの意見を支持する声があります。",
+        "2": "Flutterコミュニティには、キャロルの意見に反対する声があります。",
+        "3": "Flutterコミュニティには、キャロルの意見を無視する声があります。",
+        "4": "Flutterコミュニティには、キャロルの意見を批判する声があります。"
+      },
+      "Answer": "1"
+    },
+    "Confirmation1": {
+      "Question": "What is the main goal of Flock as mentioned in the article?",
+      "Choices": {
+        "1": "To replace Google Flutter",
+        "2": "To add bug fixes and new features",
+        "3": "To create a completely new framework",
+        "4": "To discontinue all desktop platforms"
+      },
+      "Answer": "2"
+    },
+    "Confirmation2": {
+      "Question": "According to the article, what has caused the Flutter team to de-prioritize desktop platforms?",
+      "Choices": {
+        "1": "Google's focus on AI",
+        "2": "Lack of community contributors",
+        "3": "A decrease in the number of developers",
+        "4": "The appearance of Flock"
+      },
+      "Answer": "1"
+    }
+  }
+}
