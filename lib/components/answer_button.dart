@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// 引数にタイトルの文字と、valueChangedを受け取るボタンを作成してほしい
 class AnswerButton extends StatelessWidget {
   const AnswerButton({
     Key? key,
@@ -13,11 +12,21 @@ class AnswerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.7,
-      child: ElevatedButton(
-        onPressed: selectedAnswer,
-        child: Text(title),
+    return InkWell(
+      onTap: selectedAnswer,
+      child: Container(
+        padding: EdgeInsets.all(8.0),
+        width: MediaQuery.of(context).size.width * 0.8,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: ListTile(
+          title: Text(
+            title,
+            style: TextStyle(fontSize: 14.0),
+          ),
+        ),
       ),
     );
   }

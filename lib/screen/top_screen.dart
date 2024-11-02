@@ -60,7 +60,10 @@ class TopScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController articleUrlController = TextEditingController();
+    TextEditingController articleUrlController = TextEditingController(
+      text:
+          'https://devclass.com/2024/10/30/flutter-forked-as-flock-developer-cites-company-wide-issues-at-google/',
+    );
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -75,7 +78,7 @@ class TopScreen extends StatelessWidget {
                   children: [
                     SizedBox(
                         height: 170,
-                        child: Image.asset('assets/images/hotreloader.png')),
+                        child: Image.asset('assets/images/hotreloader2.png')),
                   ],
                 ),
               ),
@@ -102,7 +105,7 @@ class TopScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: TextField(
+                        child: TextFormField(
                           controller: articleUrlController,
                           decoration: InputDecoration(
                             border: InputBorder.none,

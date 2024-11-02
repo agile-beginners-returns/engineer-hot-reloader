@@ -55,44 +55,6 @@ class _WordTestScreenState extends ConsumerState<WordTestScreen> {
           }
           final data = snapshot.data!['Questions'];
           return QuestionListWidget(questionsJson: data);
-
-          return SafeArea(
-            child: Scaffold(
-              body: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 80.0, bottom: 80.0),
-                        child: const Text('単語の意味としてもっとも適切なものを答えてください',
-                            style: TextStyle(fontSize: 16)),
-                      ),
-                      // TODO: testProviderの内容から問題を表示する
-                      Text('Hot', style: TextStyle(fontSize: 50)),
-                      AnswerButton(
-                        title: "A",
-                        selectedAnswer: () => selectedAnswer(context),
-                      ),
-                      AnswerButton(
-                        title: "B",
-                        selectedAnswer: () => selectedAnswer(context),
-                      ),
-                      AnswerButton(
-                        title: "C",
-                        selectedAnswer: () => selectedAnswer(context),
-                      ),
-                      AnswerButton(
-                        title: "D",
-                        selectedAnswer: () => selectedAnswer(context),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
         });
   }
 
@@ -103,7 +65,19 @@ class _WordTestScreenState extends ConsumerState<WordTestScreen> {
   }
 }
 
-final indexProvider = StateProvider<int>((ref) => 0);
+// final indexProvider = StateProvider<int>((ref) => 0);
+
+final indexNotifierProvider = StateNotifierProvider<IndexNotifier, int>((ref) {
+  return IndexNotifier();
+});
+
+class IndexNotifier extends StateNotifier<int> {
+  IndexNotifier() : super(0);
+
+  void increment() {
+    state++;
+  }
+}
 
 class QuestionListWidget extends ConsumerStatefulWidget {
   final Map<String, dynamic> questionsJson;
@@ -119,16 +93,19 @@ class _QuestionListWidgetState extends ConsumerState<QuestionListWidget> {
   void initState() {
     super.initState();
     // `initState`でProviderにアクセスし、データを追加
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(testListProvider.notifier).addQuestions(widget.questionsJson);
-    });
+    final questionList = ref.read(testListProvider);
+    if (questionList.isEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(testListProvider.notifier).addQuestions(widget.questionsJson);
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     // `wordListProvider`からQuestionリストを読み取る
     final questionList = ref.watch(testListProvider);
-    final questionListIndex = ref.watch(indexProvider);
+    final questionListIndex = ref.watch(indexNotifierProvider);
     print("リストの長さ: ${questionList.length}");
 
     // print("1番目の問題:${questionList[0].question}");
@@ -139,72 +116,57 @@ class _QuestionListWidgetState extends ConsumerState<QuestionListWidget> {
           title: Text('Questions List'),
         ),
         body: Center(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 80.0, bottom: 80.0),
-                child: const Text('単語の意味としてもっとも適切なものを答えてください',
-                    style: TextStyle(fontSize: 16)),
-              ),
-              Text(questionList[questionListIndex].question,
-                  style: TextStyle(fontSize: 50)),
-              for (final choice
-                  in questionList[questionListIndex].choices.values)
-                AnswerButton(
-                    title: choice,
-                    selectedAnswer: () => selectedAnswer(context, choice,
-                        questionList[questionListIndex].answer)),
-
-              // Column(
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: [
-              //     ...questionList[0]
-              //         .choices
-              //         .entries
-              //         .map((entry) => Text('Choice ${entry.key}: ${entry.value}'))
-              //         .toList(),
-              //     Text('Answer: ${questionList[0].answer}'),
-              //     Text('Other Meanings: ${questionList[0].otherMeanings}'),
-              //     Text('Example: ${questionList[0].example}'),
-              //   ],
-              // ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 80.0,
+                    bottom: 80.0,
+                    right: 20.0,
+                    left: 20.0,
+                  ),
+                  child: questionListIndex < 4
+                      ? const Text('単語の意味としてもっとも適切なものを答えてください',
+                          style: TextStyle(fontSize: 16))
+                      : questionListIndex < 8
+                          ? const Text('問題の日本語訳として最も適切なものを答えてください',
+                              style: TextStyle(fontSize: 16))
+                          : const Text('技術問題です。問題に対して適切なものを答えてください',
+                              style: TextStyle(fontSize: 16)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      right: 20.0, left: 20.0, bottom: 40.0),
+                  child: Text(questionList[questionListIndex].question,
+                      style:
+                          TextStyle(fontSize: questionListIndex < 4 ? 50 : 20)),
+                ),
+                for (final choice
+                    in questionList[questionListIndex].choices.values)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: AnswerButton(
+                        title: choice,
+                        selectedAnswer: () => selectedAnswer(context, choice,
+                            questionList[questionListIndex].answer)),
+                  ),
+              ],
+            ),
           ),
         ),
-
-        // body: ListView.builder(
-        //   itemCount: questionList.length,
-        //   itemBuilder: (context, index) {
-        //     final question = questionList[index];
-        //     return ListTile(
-        //       title: Text('Question: ${question.question}'),
-        //       subtitle: Column(
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         children: [
-        //           ...question.choices.entries
-        //               .map((entry) => Text('Choice ${entry.key}: ${entry.value}'))
-        //               .toList(),
-        //           Text('Answer: ${question.answer}'),
-        //           Text('Other Meanings: ${question.otherMeanings}'),
-        //           Text('Example: ${question.example}'),
-        //         ],
-        //       ),
-        //     );
-        //   },
-        // ),
       );
     }
     return CircularProgressIndicator();
   }
 
   selectedAnswer(BuildContext context, String choice, String correctAnswer) {
-    print("おされたよ");
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => WordTestAnswerScreen(
                   userAnswer: choice,
-                  correctAnswer: correctAnswer,
+                  correctAnswerIndex: correctAnswer,
                 )));
   }
 }
