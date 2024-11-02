@@ -16,8 +16,8 @@ class AnswerButton extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.7,
       child: ElevatedButton(
-      onPressed: selectedAnswer,
-      child: Text(title),
+        onPressed: selectedAnswer,
+        child: Text(title),
       ),
     );
   }

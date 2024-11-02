@@ -4,8 +4,10 @@ import 'package:engineer_hot_reload_app/api_request.dart';
 import 'package:engineer_hot_reload_app/components/answer_button.dart';
 import 'package:engineer_hot_reload_app/models/test_model.dart';
 import 'package:engineer_hot_reload_app/screen/result_screen.dart';
+import 'package:engineer_hot_reload_app/screen/translation_test_answer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:engineer_hot_reload_app/components/loading.dart';
 
 class WordTestScreen extends ConsumerStatefulWidget {
   final String articleUrl;
@@ -35,13 +37,7 @@ class _WordTestScreenState extends ConsumerState<WordTestScreen> {
           // 値を取得している途中の場合
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                  Text('AIが問題を生成中...'),
-                ],
-              ),
+              child: Loading(),
             );
           }
           // エラーが発生した場合
@@ -59,56 +55,6 @@ class _WordTestScreenState extends ConsumerState<WordTestScreen> {
           }
           final data = snapshot.data!['Questions'];
           return QuestionListWidget(questionsJson: data);
-
-          // print('data -> :${data}');
-          final testList = data.entries.map((entry) {
-            return {entry.key: entry.value};
-          }).toList();
-
-          // print("testList > $testList");
-
-          // response.then((data)=>{
-          //   if (data == null) {
-          //   return;
-          // }
-          // });
-          ref.read(testListProvider.notifier).addQuestions(data);
-
-          // `wordListProvider`からQuestionリストを読み取る
-          final questionList = ref.watch(testListProvider);
-          // print('questionList:$questionList');
-
-          // final testList = Tests.fromJson(
-          //     jsonDecode(data!['data']['outputs']['output_json']));
-          // print('testList:$testList');
-          // print('test1:${testList[0].question}');
-          // dataにアクセス
-          // Map<String, dynamic> data_nested = data!['data'];
-
-          // // outputsにアクセス
-          // Map<String, dynamic> outputs = data_nested['outputs'];
-
-          // // output_jsonにアクセス
-          // Map<String, dynamic> outputJson = outputs['output_json'];
-
-          // // Questionsにアクセス
-          // Map<String, dynamic> questions = outputJson['Questions'];
-
-          // 特定の質問（Word1）にアクセス
-          // Map<String, dynamic> word1 = questions['Word1'];
-          // final responsQestions =
-          //     data!['data']['outputs']['output_json']['Questions'];
-          // print('responsQestions:$responsQestions');
-          // print(
-          //     'data -> data -> outputs -> output_json:${data!['data']['outputs']['output_json'['Questions']}');
-          // final qestions = data['data']['outputs']['output_json']['Questions'];
-
-          // print('data:$data');
-          // print('data -> data :${data!['data']}');
-          // print('data -> data :${data!['data']['output_json']}');
-          // print('data -> data :${data!['data']['output_json']}');
-          // print(
-          //     'data -> data -> outputs :${data!['data']['outputs']['output_json']['Questions']}');
 
           return SafeArea(
             child: Scaffold(
@@ -157,6 +103,8 @@ class _WordTestScreenState extends ConsumerState<WordTestScreen> {
   }
 }
 
+final indexProvider = StateProvider<int>((ref) => 0);
+
 class QuestionListWidget extends ConsumerStatefulWidget {
   final Map<String, dynamic> questionsJson;
 
@@ -180,31 +128,83 @@ class _QuestionListWidgetState extends ConsumerState<QuestionListWidget> {
   Widget build(BuildContext context) {
     // `wordListProvider`からQuestionリストを読み取る
     final questionList = ref.watch(testListProvider);
+    final questionListIndex = ref.watch(indexProvider);
+    print("リストの長さ: ${questionList.length}");
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Questions List'),
-      ),
-      body: ListView.builder(
-        itemCount: questionList.length,
-        itemBuilder: (context, index) {
-          final question = questionList[index];
-          return ListTile(
-            title: Text('Question: ${question.question}'),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ...question.choices.entries
-                    .map((entry) => Text('Choice ${entry.key}: ${entry.value}'))
-                    .toList(),
-                Text('Answer: ${question.answer}'),
-                Text('Other Meanings: ${question.otherMeanings}'),
-                Text('Example: ${question.example}'),
-              ],
-            ),
-          );
-        },
-      ),
-    );
+    // print("1番目の問題:${questionList[0].question}");
+    if (questionList.isNotEmpty) {
+      print("indexの数:${questionListIndex}");
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Questions List'),
+        ),
+        body: Center(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 80.0, bottom: 80.0),
+                child: const Text('単語の意味としてもっとも適切なものを答えてください',
+                    style: TextStyle(fontSize: 16)),
+              ),
+              Text(questionList[questionListIndex].question,
+                  style: TextStyle(fontSize: 50)),
+              for (final choice
+                  in questionList[questionListIndex].choices.values)
+                AnswerButton(
+                    title: choice,
+                    selectedAnswer: () => selectedAnswer(context, choice,
+                        questionList[questionListIndex].answer)),
+
+              // Column(
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: [
+              //     ...questionList[0]
+              //         .choices
+              //         .entries
+              //         .map((entry) => Text('Choice ${entry.key}: ${entry.value}'))
+              //         .toList(),
+              //     Text('Answer: ${questionList[0].answer}'),
+              //     Text('Other Meanings: ${questionList[0].otherMeanings}'),
+              //     Text('Example: ${questionList[0].example}'),
+              //   ],
+              // ),
+            ],
+          ),
+        ),
+
+        // body: ListView.builder(
+        //   itemCount: questionList.length,
+        //   itemBuilder: (context, index) {
+        //     final question = questionList[index];
+        //     return ListTile(
+        //       title: Text('Question: ${question.question}'),
+        //       subtitle: Column(
+        //         crossAxisAlignment: CrossAxisAlignment.start,
+        //         children: [
+        //           ...question.choices.entries
+        //               .map((entry) => Text('Choice ${entry.key}: ${entry.value}'))
+        //               .toList(),
+        //           Text('Answer: ${question.answer}'),
+        //           Text('Other Meanings: ${question.otherMeanings}'),
+        //           Text('Example: ${question.example}'),
+        //         ],
+        //       ),
+        //     );
+        //   },
+        // ),
+      );
+    }
+    return CircularProgressIndicator();
+  }
+
+  selectedAnswer(BuildContext context, String choice, String correctAnswer) {
+    print("おされたよ");
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => WordTestAnswerScreen(
+                  userAnswer: choice,
+                  correctAnswer: correctAnswer,
+                )));
   }
 }
