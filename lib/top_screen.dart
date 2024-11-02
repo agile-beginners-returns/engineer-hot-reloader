@@ -1,3 +1,4 @@
+import 'package:engineer_hot_reload_app/word_test_screen.dart';
 import 'package:flutter/material.dart';
 
 class TopScreen extends StatelessWidget {
@@ -5,6 +6,7 @@ class TopScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController articleUrlController = TextEditingController();
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -28,15 +30,18 @@ class TopScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 10.0, left: 10.0),
                 child: Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: TextField(
+                          controller: articleUrlController,
                           decoration: InputDecoration(
-                        // border: InputBorder.none,
-                        hintText: 'URLを入力',
-                      )),
+                            // border: InputBorder.none,
+                            hintText: 'URLを入力',
+                          )),
                     ),
                     IconButton(
-                        icon: const Icon(Icons.arrow_forward), onPressed: () {})
+                        icon: const Icon(Icons.arrow_forward),
+                        onPressed: () => toWordTestScreen(
+                            context, articleUrlController.text)),
                   ],
                 ),
               ),
@@ -45,5 +50,15 @@ class TopScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  toWordTestScreen(BuildContext context, String articleUrl) {
+    if (articleUrl.isEmpty) {
+      return;
+    }
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => WordTestScreen(articleUrl: articleUrl)));
   }
 }
