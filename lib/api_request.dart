@@ -23,9 +23,24 @@ class TestListNotifier extends StateNotifier<List<Question>> {
           (entry) => Question.fromJson(entry.value),
         )
         .toList();
+    // questionnsの各要素のchoicesをランダムに並び替える
+    // questions.forEach((element) {
+    //   element.choices
+    //     ..remove('Answer')
+    //     ..remove('OtherMeanings')
+    //     ..remove('Example');
+    //   element.choices
+    //     ..addAll({'Answer': element.answer})
+    //     ..addAll({'OtherMeanings': element.otherMeanings})
+    //     ..addAll({'Example': element.example});
+    // });
     print("questions:${questions[0].question}");
     // 既存のリストに追加
     state = [...state, ...questions];
+  }
+
+  void insertIsCorrect(int index, bool isCorrect) {
+    state[index] = state[index].copyWith(isCorrect: isCorrect);
   }
 }
 
@@ -43,6 +58,7 @@ class Question {
     this.userAnswer,
     this.otherMeanings,
     required this.example,
+    this.isCorrect,
   });
   final String question;
   final Map<String, dynamic> choices;
@@ -50,6 +66,27 @@ class Question {
   final String? userAnswer;
   final String? otherMeanings;
   final String example;
+  final bool? isCorrect;
+
+  Question copyWith({
+    String? question,
+    Map<String, dynamic>? choices,
+    String? answer,
+    String? userAnswer,
+    String? otherMeanings,
+    String? example,
+    bool? isCorrect,
+  }) {
+    return Question(
+      question: question ?? this.question,
+      choices: choices ?? this.choices,
+      answer: answer ?? this.answer,
+      userAnswer: userAnswer ?? this.userAnswer,
+      otherMeanings: otherMeanings ?? this.otherMeanings,
+      example: example ?? this.example,
+      isCorrect: isCorrect ?? this.isCorrect,
+    );
+  }
 
   // JSONデータから`Question`インスタンスを作成するファクトリーメソッド
   factory Question.fromJson(Map<String, dynamic> json) {

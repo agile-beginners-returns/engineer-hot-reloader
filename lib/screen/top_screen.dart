@@ -64,187 +64,185 @@ class TopScreen extends StatelessWidget {
       text:
           'https://devclass.com/2024/10/30/flutter-forked-as-flock-developer-cites-company-wide-issues-at-google/',
     );
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              // タイトルとアイコン
-              Padding(
-                padding: const EdgeInsets.only(top: 80.0, bottom: 30.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                        height: 170,
-                        child: Image.asset('assets/images/hotreloader2.png')),
-                  ],
-                ),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            // タイトルとアイコン
+            Padding(
+              padding: const EdgeInsets.only(top: 80.0, bottom: 30.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                      height: 170,
+                      child: Image.asset('assets/images/hotreloader2.png')),
+                ],
               ),
-              // URL入力フォームとボタン
-              Padding(
-                padding: const EdgeInsets.only(right: 10.0, left: 10.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFE0E5EC),
-                          borderRadius: BorderRadius.circular(15.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.white,
-                              offset: Offset(-5, -5),
-                              blurRadius: 10,
-                            ),
-                            BoxShadow(
-                              color: const Color(0xFFA3B1C6),
-                              offset: Offset(5, 5),
-                              blurRadius: 10,
-                            ),
-                          ],
-                        ),
-                        child: TextFormField(
-                          controller: articleUrlController,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'URLを入力',
-                            hintStyle: TextStyle(color: Color(0xFF888888)),
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 15.0),
-                          ),
-                          style: const TextStyle(color: Color(0xFF333333)),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Container(
+            ),
+            // URL入力フォームとボタン
+            Padding(
+              padding: const EdgeInsets.only(right: 10.0, left: 10.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
+                        color: const Color(0xFFE0E5EC),
+                        borderRadius: BorderRadius.circular(15.0),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.white,
-                            offset: Offset(-3, -3),
-                            blurRadius: 6,
+                            offset: Offset(-5, -5),
+                            blurRadius: 10,
                           ),
                           BoxShadow(
                             color: const Color(0xFFA3B1C6),
-                            offset: Offset(3, 3),
-                            blurRadius: 6,
+                            offset: Offset(5, 5),
+                            blurRadius: 10,
                           ),
                         ],
                       ),
-                      child: IconButton(
-                        icon: const Icon(Icons.arrow_forward),
-                        color: const Color(0xFF333333),
-                        onPressed: () => toWordTestScreen(
-                            context, articleUrlController.text),
+                      child: TextFormField(
+                        controller: articleUrlController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'URLを入力',
+                          hintStyle: TextStyle(color: Color(0xFF888888)),
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 15.0),
+                        ),
+                        style: const TextStyle(color: Color(0xFF333333)),
                       ),
                     ),
-                  ],
-                ),
-              ),
-              // オススメ記事選択欄
-              Padding(
-                padding: const EdgeInsets.only(top: 30.0, bottom: 15.0),
-                child: Text(
-                  "オススメ記事一覧",
-                  style: TextStyle(
-                    fontSize: 30,
-                    color: Color(0xFF333333),
-                    fontWeight: FontWeight.bold,
                   ),
+                  const SizedBox(width: 10),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white,
+                          offset: Offset(-3, -3),
+                          blurRadius: 6,
+                        ),
+                        BoxShadow(
+                          color: const Color(0xFFA3B1C6),
+                          offset: Offset(3, 3),
+                          blurRadius: 6,
+                        ),
+                      ],
+                    ),
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_forward),
+                      color: const Color(0xFF333333),
+                      onPressed: () =>
+                          toWordTestScreen(context, articleUrlController.text),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // オススメ記事選択欄
+            Padding(
+              padding: const EdgeInsets.only(top: 30.0, bottom: 15.0),
+              child: Text(
+                "オススメ記事一覧",
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Color(0xFF333333),
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0, vertical: 12.0),
-                  itemCount: articles.length,
-                  itemBuilder: (context, index) {
-                    final article = articles[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: InkWell(
-                        onTap: () {
-                          toWordTestScreen(context, article["url"]);
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.shade300,
-                                offset: const Offset(-5, -5),
-                                blurRadius: 15,
-                                spreadRadius: 1,
-                              ),
-                              BoxShadow(
-                                color: Colors.grey.shade500,
-                                offset: const Offset(5, 5),
-                                blurRadius: 15,
-                                spreadRadius: 1,
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              if (article["cover_image"] != null)
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(15),
-                                    topRight: Radius.circular(15),
-                                  ),
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: Image.network(
-                                      article["cover_image"],
-                                      fit: BoxFit.cover,
-                                      width: MediaQuery.of(context).size.width,
-                                      height: 180,
-                                    ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 12.0),
+                itemCount: articles.length,
+                itemBuilder: (context, index) {
+                  final article = articles[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: InkWell(
+                      onTap: () {
+                        toWordTestScreen(context, article["url"]);
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.shade300,
+                              offset: const Offset(-5, -5),
+                              blurRadius: 15,
+                              spreadRadius: 1,
+                            ),
+                            BoxShadow(
+                              color: Colors.grey.shade500,
+                              offset: const Offset(5, 5),
+                              blurRadius: 15,
+                              spreadRadius: 1,
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (article["cover_image"] != null)
+                              ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15),
+                                ),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Image.network(
+                                    article["cover_image"],
+                                    fit: BoxFit.cover,
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 180,
                                   ),
                                 ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0, vertical: 12.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      article["title"],
-                                      style: const TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      article["description"],
-                                      style: const TextStyle(
-                                        fontSize: 14.0,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                ),
                               ),
-                            ],
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 12.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    article["title"],
+                                    style: const TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    article["description"],
+                                    style: const TextStyle(
+                                      fontSize: 14.0,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    );
-                  },
-                ),
-              )
-            ],
-          ),
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
         ),
       ),
     );

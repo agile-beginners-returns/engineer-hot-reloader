@@ -15,16 +15,31 @@ class AnswerButton extends StatelessWidget {
     return InkWell(
       onTap: selectedAnswer,
       child: Container(
-        padding: EdgeInsets.all(8.0),
         width: MediaQuery.of(context).size.width * 0.8,
+        padding: EdgeInsets.symmetric(vertical: 12.0), // 縦方向の余白を追加
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
-          borderRadius: BorderRadius.circular(8.0),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12), // 角を丸くする
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade300,
+              offset: Offset(-4, -4),
+              blurRadius: 8,
+            ),
+            BoxShadow(
+              color: Colors.grey.shade600,
+              offset: Offset(4, 4),
+              blurRadius: 8,
+            ),
+          ],
         ),
-        child: ListTile(
-          title: Text(
-            title,
-            style: TextStyle(fontSize: 14.0),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Center(
+            child: Text(
+              title,
+              style: TextStyle(fontSize: 14.0),
+            ),
           ),
         ),
       ),

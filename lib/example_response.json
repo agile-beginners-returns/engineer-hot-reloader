@@ -1,112 +1,110 @@
 {
-  "Questions": {
-    "Word1": {
-      "Question": "Stagnant",
-      "Choices": {
-        "1": "停滞した",
-        "2": "活発な",
-        "3": "流れる",
-        "4": "進行中の"
-      },
-      "Answer": "1",
-      "OtherMeanings": "淀んだ",
-      "Example": "The water in the pond was stagnant."
+  "Word1": {
+    "Question": "Frustrating",
+    "Choices": {
+      "1": "楽しい",
+      "2": "イライラさせる",
+      "3": "簡単な",
+      "4": "複雑な"
     },
-    "Word2": {
-      "Question": "Contributors",
-      "Choices": {
-        "1": "寄稿者",
-        "2": "批判者",
-        "3": "購読者",
-        "4": "管理者"
-      },
-      "Answer": "1",
-      "OtherMeanings": "貢献者",
-      "Example": "The project had several contributors from different countries."
+    "Answer": "2",
+    "OtherMeanings": "苛立たしい",
+    "Example": "The delays in the project were frustrating for the team."
+  },
+  "Word2": {
+    "Question": "Prioritize",
+    "Choices": {
+      "1": "無視する",
+      "2": "後回しにする",
+      "3": "優先する",
+      "4": "中止する"
     },
-    "Word3": {
-      "Question": "Indication",
-      "Choices": {
-        "1": "兆候",
-        "2": "否定",
-        "3": "模倣",
-        "4": "除外"
-      },
-      "Answer": "1",
-      "OtherMeanings": "指示",
-      "Example": "There was no indication of a problem."
+    "Answer": "3",
+    "OtherMeanings": "優先順位を付ける",
+    "Example": "We need to prioritize the tasks for this week."
+  },
+  "Word3": {
+    "Question": "Perceived",
+    "Choices": {
+      "1": "認識された",
+      "2": "見えない",
+      "3": "拒否された",
+      "4": "忘れられた"
     },
-    "Word4": {
-      "Question": "Foundation",
-      "Choices": {
-        "1": "基盤",
-        "2": "解体",
-        "3": "誤解",
-        "4": "終了"
-      },
-      "Answer": "1",
-      "OtherMeanings": "設立",
-      "Example": "The foundation of the building was solid."
+    "Answer": "1",
+    "OtherMeanings": "感じられた",
+    "Example": "The risks of the plan were perceived by the management."
+  },
+  "Word4": {
+    "Question": "Stagnant",
+    "Choices": {
+      "1": "流動的な",
+      "2": "活発な",
+      "3": "発展的な",
+      "4": "停滞した"
     },
-    "Translation1": {
-      "Question": "Carroll believes that Google’s Flutter team numbers about 50 people, with the head count frozen in 2023 and then “a small number of layoffs” this year.",
-      "Choices": {
-        "1": "キャロルは、GoogleのFlutterチームが約50人で、2023年に人数が固定され、今年は「少数のレイオフ」があったと考えています。",
-        "2": "キャロルは、GoogleのFlutterチームが約50人で、2023年に人数が増加し、今年は「大規模なレイオフ」があったと考えています。",
-        "3": "キャロルは、GoogleのFlutterチームが約50人で、2023年に人数が減少し、今年は「レイオフがなかった」と考えています。",
-        "4": "キャロルは、GoogleのFlutterチームが約50人で、2023年に人数が変動し、今年は「多数のレイオフ」があったと考えています。"
-      },
-      "Answer": "1"
+    "Answer": "4",
+    "OtherMeanings": "停滞している",
+    "Example": "The market has been stagnant for the past few years."
+  },
+  "Translation1": {
+    "Question": "Matt Carroll, a Flutter developer and consultant who was formerly on the Flutter team at Google, has forked the cross-platform framework to create Flock.",
+    "Choices": {
+      "1": "GoogleのFlutterチームに以前所属していたFlutter開発者でコンサルタントのMatt Carrollは、クロスプラットフォームフレームワークをフォークしてFlockを作成しました。",
+      "2": "Matt Carrollは新しいプログラミング言語を開発しました。",
+      "3": "FlockはGoogleのFlutterを完全に置き換えることを目指しています。",
+      "4": "Matt CarrollはFlutterの使用を中止しました。"
     },
-    "Translation2": {
-      "Question": "Serious bugs are left unfixed for too long, Carroll said, causing large customers to stop using Flutter in some instances.",
-      "Choices": {
-        "1": "キャロルは、重大なバグが長期間放置され、大手顧客が一部のケースでFlutterの使用を中止する原因になっていると述べた。",
-        "2": "キャロルは、重大なバグがすぐに修正され、大手顧客がFlutterの使用を継続する理由になっていると述べた。",
-        "3": "キャロルは、重大なバグが長期間放置され、大手顧客がFlutterの使用を増やす原因になっていると述べた。",
-        "4": "キャロルは、重大なバグがすぐに修正され、大手顧客が一部のケースでFlutterの使用を中止する原因になっていると述べた。"
-      },
-      "Answer": "1"
+    "Answer": "1"
+  },
+  "Translation2": {
+    "Question": "Carroll left Google in 2020 to become a Flutter consultant – also setting up a site called Flutter Bounty Hunters – to create open source packages for Flutter and Dart to fill perceived missing pieces.",
+    "Choices": {
+      "1": "CarrollはFlutterを使用して新しいアプリを開発しました。",
+      "2": "Carrollは2020年にGoogleを退社し、Flutterコンサルタントになりました。また、Flutter Bounty Huntersというサイトを立ち上げ、FlutterとDartのためのオープンソースパッケージを作成して、欠けていると感じた部分を補いました。",
+      "3": "Carrollは2020年に新しい会社を設立しました。",
+      "4": "CarrollはGoogleでFlutterの開発を続けました。"
     },
-    "Translation3": {
-      "Question": "The goal of Flock is not to replace Google Flutter, but to add bug fixes and new features – in the hope that the Google team will add them “on their schedule.”",
-      "Choices": {
-        "1": "Flockの目標は、Google Flutterを置き換えることではなく、バグ修正と新機能を追加することです。Googleチームが「彼らのスケジュールで」それらを追加することを期待しています。",
-        "2": "Flockの目標は、Google Flutterを置き換えることであり、バグ修正と新機能を削除することです。Googleチームが「彼らのスケジュールで」それらを削除することを期待しています。",
-        "3": "Flockの目標は、Google Flutterを拡張することであり、バグ修正と新機能を追加することです。Googleチームが「彼らのスケジュールで」それらを削除することを期待しています。",
-        "4": "Flockの目標は、Google Flutterを置き換えることであり、バグ修正と新機能を削除することです。Googleチームが「彼らのスケジュールで」それらを追加することを期待しています。"
-      },
-      "Answer": "1"
+    "Answer": "4"
+  },
+  "Translation3": {
+    "Question": "Although Flutter is open source, according to Carroll many developers have found communication with the Flutter team frustrating, if not unworkable, with long delays.",
+    "Choices": {
+      "1": "Flutterは閉じたソースです。",
+      "2": "Flutterはコミュニティにとって非常に使いやすいです。",
+      "3": "Flutterはオープンソースですが、Carrollによれば、多くの開発者はFlutterチームとのコミュニケーションに長い遅延があり、フラストレーションがたまり、場合によっては実行不可能だと感じています。",
+      "4": "FlutterはGoogleによって完全に管理されています。"
     },
-    "Translation4": {
-      "Question": "There is some support in the Flutter community for Carroll’s views.",
-      "Choices": {
-        "1": "Flutterコミュニティには、キャロルの意見を支持する声があります。",
-        "2": "Flutterコミュニティには、キャロルの意見に反対する声があります。",
-        "3": "Flutterコミュニティには、キャロルの意見を無視する声があります。",
-        "4": "Flutterコミュニティには、キャロルの意見を批判する声があります。"
-      },
-      "Answer": "1"
+    "Answer": "3"
+  },
+  "Translation4": {
+    "Question": "The goal of Flock is not to replace Google Flutter, but to add bug fixes and new features – in the hope that the Google team will add them on their schedule.",
+    "Choices": {
+      "1": "Flockの目的はGoogle Flutterを完全に置き換えることです。",
+      "2": "Flockの目的はGoogle Flutterを置き換えることではなく、バグ修正や新機能を追加することで、Googleチームがそれを彼らのスケジュールで追加することを期待しています。",
+      "3": "Flockは新しいプログラミング言語です。",
+      "4": "FlockはGoogleの支援を受けて開発されています。"
     },
-    "Confirmation1": {
-      "Question": "What is the main goal of Flock as mentioned in the article?",
-      "Choices": {
-        "1": "To replace Google Flutter",
-        "2": "To add bug fixes and new features",
-        "3": "To create a completely new framework",
-        "4": "To discontinue all desktop platforms"
-      },
-      "Answer": "2"
+    "Answer": "2"
+  },
+  "Confirmation1": {
+    "Question": "What is the main reason Matt Carroll forked Flutter to create Flock?",
+    "Choices": {
+      "1": "To compete with Google's Flutter",
+      "2": "Due to Google's focus on AI impacting Flutter development",
+      "3": "To create a new programming language",
+      "4": "To eliminate the use of open-source software"
     },
-    "Confirmation2": {
-      "Question": "According to the article, what has caused the Flutter team to de-prioritize desktop platforms?",
-      "Choices": {
-        "1": "Google's focus on AI",
-        "2": "Lack of community contributors",
-        "3": "A decrease in the number of developers",
-        "4": "The appearance of Flock"
-      },
-      "Answer": "1"
-    }
+    "Answer": "2"
+  },
+  "Confirmation2": {
+    "Question": "What is the current state of Flutter for desktop platforms according to Matt Carroll?",
+    "Choices": {
+      "1": "Rapidly developing",
+      "2": "Completely abandoned",
+      "3": "Mostly stagnant",
+      "4": "Fully supported"
+    },
+    "Answer": "3"
   }
 }

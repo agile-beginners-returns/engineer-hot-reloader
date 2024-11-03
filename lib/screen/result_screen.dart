@@ -1,22 +1,23 @@
+import 'package:engineer_hot_reload_app/screen/top_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:engineer_hot_reload_app/api_request.dart';
 
 class ResultScreen extends ConsumerWidget {
-  final int score = 3;
-  final int total = 4;
+  late final int score;
+  late final int total;
 
   // Define separate scores and totals for each type of question
-  final int wordScore = 3;
-  final int wordTotal = 4;
+  late final int wordScore;
+  late final int wordTotal;
 
-  final int translationScore = 2;
-  final int translationTotal = 5;
+  late final int translationScore;
+  late final int translationTotal;
 
-  final int techScore = 4;
-  final int techTotal = 6;
+  late final int techScore;
+  late final int techTotal;
 
-  final List<String> learnedWords = ["hot", "hot", "hot", "hot"];
+  late final List<String> learnedWords;
 
   String getRank(int score) {
     if (score >= 1 && score <= 3) {
@@ -32,6 +33,32 @@ class ResultScreen extends ConsumerWidget {
     }
   }
 
+  String getFourQuestionRank(int score) {
+    if (score <= 1) {
+      return 'C';
+    } else if (score == 2) {
+      return 'B';
+    } else if (score == 3) {
+      return 'A';
+    } else if (score == 4) {
+      return 'S';
+    } else {
+      return '';
+    }
+  }
+
+  String getTwoQuestionRank(int score) {
+    if (score == 0) {
+      return 'C';
+    } else if (score == 1) {
+      return 'A';
+    } else if (score == 2) {
+      return 'S';
+    } else {
+      return '';
+    }
+  }
+
   void scrollToTop(BuildContext context) {
     // Implement scroll to top functionality if using a scrollable widget
     print("Returning to the top.");
@@ -39,6 +66,18 @@ class ResultScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final testList = ref.read(testListProvider);
+    score = testList.where((question) => question.isCorrect!).length;
+    wordScore =
+        testList.sublist(0, 4).where((question) => question.isCorrect!).length;
+    wordTotal = testList.sublist(0, 4).length;
+    translationScore =
+        testList.sublist(4, 8).where((question) => question.isCorrect!).length;
+    translationTotal = testList.sublist(4, 8).length;
+    techScore =
+        testList.sublist(8, 10).where((question) => question.isCorrect!).length;
+    techTotal = testList.sublist(8, 10).length;
+
     return Scaffold(
         body: SafeArea(
             child: Scaffold(
@@ -86,7 +125,7 @@ class ResultScreen extends ConsumerWidget {
                         ),
                         child: Center(
                           child: Text(
-                            getRank(wordScore), // Display rank based on score
+                            getRank(score), // Display rank based on score
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -103,7 +142,7 @@ class ResultScreen extends ConsumerWidget {
                     child: Container(
                       margin: EdgeInsets.only(top: 25),
                       child: Text(
-                        '$wordScore / 10', // Display the score variable here
+                        '$score / 10', // Display the score variable here
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -120,9 +159,10 @@ class ResultScreen extends ConsumerWidget {
                 padding: const EdgeInsets.only(top: 8.0),
                 child: buildNeumorphicRectangle(
                   context: context,
-                  title: "単語問題",
+                  title: "　単語問題　",
                   score: wordScore,
                   total: wordTotal,
+                  rank: getFourQuestionRank(wordScore),
                 ),
               ),
               Padding(
@@ -132,7 +172,10 @@ class ResultScreen extends ConsumerWidget {
                   title: "日本語訳問題",
                   score: translationScore,
                   total: translationTotal,
+                  rank: getFourQuestionRank(translationScore
+                  
                 ),
+              ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
@@ -141,14 +184,15 @@ class ResultScreen extends ConsumerWidget {
                   title: "技術確認問題",
                   score: techScore,
                   total: techTotal,
+                  rank: getTwoQuestionRank(techScore),
                 ),
               ),
               SizedBox(height: 20),
               // "Topに戻る" button with larger size
               TextButton(
                 onPressed: () {
-                  scrollToTop(
-                      context); // Call the function to scroll to the top
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => TopScreen()));
                 },
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.symmetric(
@@ -178,13 +222,12 @@ class ResultScreen extends ConsumerWidget {
   }
 }
 
-Widget buildNeumorphicRectangle({
-  required BuildContext context,
-  required String title,
-  required int score,
-  required int total,
-}) {
-  final List<String> learnedWords = ["hot", "hot", "hot", "hot"];
+Widget buildNeumorphicRectangle(
+    {required BuildContext context,
+    required String title,
+    required int score,
+    required int total,
+    required String rank}) {
   return Container(
     width: 300,
     padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
@@ -208,46 +251,76 @@ Widget buildNeumorphicRectangle({
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               title,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
             ),
             SizedBox(height: 4),
-            Text(
-              '$score / $total',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.shade300,
+                    offset: Offset(-4, -4),
+                    blurRadius: 8,
+                  ),
+                  BoxShadow(
+                    color: Colors.grey.shade600,
+                    offset: Offset(4, 4),
+                    blurRadius: 8,
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  rank, // Display rank based on score
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
               ),
             ),
           ],
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '学んだ単語',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            SizedBox(height: 4),
-            for (var word in learnedWords.take(2))
-              Text(
-                '・$word ・$word',
-                style: TextStyle(fontSize: 16, color: Colors.black),
-              ),
-          ],
+        Text(
+          '$score / $total',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
         ),
+        // Column(
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   children: [
+        //     Text(
+        //       '学んだ単語',
+        //       style: TextStyle(
+        //         fontSize: 14,
+        //         fontWeight: FontWeight.bold,
+        //         color: Colors.black,
+        //       ),
+        //     ),
+        //     SizedBox(height: 4),
+        //     for (var word in learnedWords.take(2))
+        //       Text(
+        //         '・$word ・$word',
+        //         style: TextStyle(fontSize: 16, color: Colors.black),
+        //       ),
+        //   ],
+        // ),
       ],
     ),
   );
