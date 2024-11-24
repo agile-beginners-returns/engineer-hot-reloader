@@ -1,0 +1,110 @@
+{
+  "Word1": {
+    "Question": "Frustrating",
+    "Choices": {
+      "1": "楽しい",
+      "2": "イライラさせる",
+      "3": "簡単な",
+      "4": "複雑な"
+    },
+    "Answer": "2",
+    "OtherMeanings": "苛立たしい",
+    "Example": "The delays in the project were frustrating for the team."
+  },
+  "Word2": {
+    "Question": "Prioritize",
+    "Choices": {
+      "1": "無視する",
+      "2": "後回しにする",
+      "3": "優先する",
+      "4": "中止する"
+    },
+    "Answer": "3",
+    "OtherMeanings": "優先順位を付ける",
+    "Example": "We need to prioritize the tasks for this week."
+  },
+  "Word3": {
+    "Question": "Perceived",
+    "Choices": {
+      "1": "認識された",
+      "2": "見えない",
+      "3": "拒否された",
+      "4": "忘れられた"
+    },
+    "Answer": "1",
+    "OtherMeanings": "感じられた",
+    "Example": "The risks of the plan were perceived by the management."
+  },
+  "Word4": {
+    "Question": "Stagnant",
+    "Choices": {
+      "1": "流動的な",
+      "2": "活発な",
+      "3": "発展的な",
+      "4": "停滞した"
+    },
+    "Answer": "4",
+    "OtherMeanings": "停滞している",
+    "Example": "The market has been stagnant for the past few years."
+  },
+  "Translation1": {
+    "Question": "Matt Carroll, a Flutter developer and consultant who was formerly on the Flutter team at Google, has forked the cross-platform framework to create Flock.",
+    "Choices": {
+      "1": "GoogleのFlutterチームに以前所属していたFlutter開発者でコンサルタントのMatt Carrollは、クロスプラットフォームフレームワークをフォークしてFlockを作成しました。",
+      "2": "Matt Carrollは新しいプログラミング言語を開発しました。",
+      "3": "FlockはGoogleのFlutterを完全に置き換えることを目指しています。",
+      "4": "Matt CarrollはFlutterの使用を中止しました。"
+    },
+    "Answer": "1"
+  },
+  "Translation2": {
+    "Question": "Carroll left Google in 2020 to become a Flutter consultant – also setting up a site called Flutter Bounty Hunters – to create open source packages for Flutter and Dart to fill perceived missing pieces.",
+    "Choices": {
+      "1": "CarrollはFlutterを使用して新しいアプリを開発しました。",
+      "2": "Carrollは2020年にGoogleを退社し、Flutterコンサルタントになりました。また、Flutter Bounty Huntersというサイトを立ち上げ、FlutterとDartのためのオープンソースパッケージを作成して、欠けていると感じた部分を補いました。",
+      "3": "Carrollは2020年に新しい会社を設立しました。",
+      "4": "CarrollはGoogleでFlutterの開発を続けました。"
+    },
+    "Answer": "4"
+  },
+  "Translation3": {
+    "Question": "Although Flutter is open source, according to Carroll many developers have found communication with the Flutter team frustrating, if not unworkable, with long delays.",
+    "Choices": {
+      "1": "Flutterは閉じたソースです。",
+      "2": "Flutterはコミュニティにとって非常に使いやすいです。",
+      "3": "Flutterはオープンソースですが、Carrollによれば、多くの開発者はFlutterチームとのコミュニケーションに長い遅延があり、フラストレーションがたまり、場合によっては実行不可能だと感じています。",
+      "4": "FlutterはGoogleによって完全に管理されています。"
+    },
+    "Answer": "3"
+  },
+  "Translation4": {
+    "Question": "The goal of Flock is not to replace Google Flutter, but to add bug fixes and new features – in the hope that the Google team will add them on their schedule.",
+    "Choices": {
+      "1": "Flockの目的はGoogle Flutterを完全に置き換えることです。",
+      "2": "Flockの目的はGoogle Flutterを置き換えることではなく、バグ修正や新機能を追加することで、Googleチームがそれを彼らのスケジュールで追加することを期待しています。",
+      "3": "Flockは新しいプログラミング言語です。",
+      "4": "FlockはGoogleの支援を受けて開発されています。"
+    },
+    "Answer": "2"
+  },
+  "Confirmation1": {
+    "Question": "What is the main reason Matt Carroll forked Flutter to create Flock?",
+    "Choices": {
+      "1": "To compete with Google's Flutter",
+      "2": "Due to Google's focus on AI impacting Flutter development",
+      "3": "To create a new programming language",
+      "4": "To eliminate the use of open-source software"
+    },
+    "Answer": "2"
+  },
+  "Confirmation2": {
+    "Question": "What is the current state of Flutter for desktop platforms according to Matt Carroll?",
+    "Choices": {
+      "1": "Rapidly developing",
+      "2": "Completely abandoned",
+      "3": "Mostly stagnant",
+      "4": "Fully supported"
+    },
+    "Answer": "3"
+  }
+}
